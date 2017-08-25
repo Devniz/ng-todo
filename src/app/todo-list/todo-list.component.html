@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Add new item:</h1>
+  <form #simpleList="ngForm">
+    <input type="text" placeholder="Insert new item here..." [(ngModel)]="model.item" name="item" #item="ngModel" required pattern="[a-zA-Z ]*">
+    <div *ngIf="item.errors && (item.dirty || item.touched)" class="validation-error" >
+      <div class="error-message" [hidden]="!item.errors.required">Please insert an item before to add to the list.</div>
+      <div class="error-message" [hidden]="!item.errors.pattern">Please insert a valid item using only letters.</div>
+    </div>
+    <div class="container">
+      <button [disabled]="!simpleList.form.valid" type="submit" (click)="add()">ADD</button>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <h1>Items:</h1>
+  <div *ngFor="let item of currentItems; let i = index;" >
+    <span>{{item}}</span>
+  </div>
+</div>
